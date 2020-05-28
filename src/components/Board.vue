@@ -1,4 +1,5 @@
 <template>
+	<!-- foo -->
 	<div class="board">
 		<Cell v-for="n in 200" v-bind:key="'cell' + n"/>
 	</div>
