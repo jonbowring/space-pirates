@@ -1,5 +1,4 @@
 <template>
-	<!-- foo -->
 	<div class="board">
 		<Cell v-for="n in 200" v-bind:key="'cell' + n"/>
 	</div>
@@ -18,9 +17,12 @@ export default {
 
 <style scoped>
 	.board {
-		width: 100%;
+		width: 100vh;
 		display: grid;
 		grid-template-columns: repeat(20, 1fr);
 		grid-template-rows: repeat(10, 1fr);
+		grid-gap: 0;
+		justify-items: center;
+		align-items: center;
 	}
 </style>
