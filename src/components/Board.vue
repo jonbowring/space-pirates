@@ -1,6 +1,6 @@
 <template>
 	<div class="board">
-		<Cell v-for="n in 200" v-bind:key="'cell' + n"/>
+		<Cell v-for="n in 100" v-bind:key="'cell' + n" v-bind:id="'cell' + n" v-bind:type="$parent.settings.cellTypes[(n - 1)]"/>
 	</div>
 </template>
 
@@ -19,7 +19,7 @@ export default {
 	.board {
 		width: 100vh;
 		display: grid;
-		grid-template-columns: repeat(20, 1fr);
+		grid-template-columns: repeat(10, 1fr);
 		grid-template-rows: repeat(10, 1fr);
 		grid-gap: 0;
 		justify-items: center;
