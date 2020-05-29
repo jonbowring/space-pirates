@@ -1,17 +1,20 @@
 <template>
 	<div class="cell" v-bind:class="[activeClass]">
-		<span>{{ type }}</span>
+		<span>{{ this.settings.cellName }}</span>
 	</div>
 </template>
 
 <script>
 export default {
 	name: 'Cell',
-	props: ['id','type'],
+	props: {
+		id: String,
+		settings: Object
+	},
 	created: function() {
 		
 		// Set the style for the cell type
-		switch(this.type) {
+		switch(this.settings.cellType) {
 			case 'planet':
 				this.activeClass = 'planet';
 				break;
@@ -24,10 +27,21 @@ export default {
 			default:
 				break;
 		}
+
+	},
+	mounted: function() {
+		
+		// Save the cell screen position
+		this.position = {
+			vMiddle: (this.$el.offsetTop + ( this.$el.offsetWidth / 2 )),
+			hMiddle: (this.$el.offsetLeft + ( this.$el.offsetHeight / 2 ))
+		}
+
 	},
 	data: function() {
 		return {
-			activeClass: ''
+			activeClass: '',
+			position: null
 		}
 	}
 }
@@ -43,14 +57,21 @@ export default {
 		grid-template-rows: 1fr;
 		justify-items: center;
 		align-items: center;
+		text-align: center;
 	}
 
 	.planet {
-		background: #0000FF;
+		background: url('../assets/planet-1.png');
+		background-repeat: none;
+		background-size: contain;
+		background-position: center;
 	}
 
 	.bauble {
-		background: #FF0000;
+		background: url('../assets/asteroid-1.png');
+		background-repeat: none;
+		background-size: contain;
+		background-position: center;
 	}
 
 	.space {

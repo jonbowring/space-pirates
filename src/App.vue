@@ -15,9 +15,8 @@
     data: function() {
       return {
         settings: {
-          cellTypes: []
-        },
-        hello: 'world'
+          cells: []
+        }
       }
     },
     created: function() {
@@ -26,23 +25,34 @@
     methods: {
       initBoard: function() {
         
-        // Add the planets to the cellTypes array
-        for(var i = 0; i < 10; i++) {
-          this.settings.cellTypes.push('planet');
+        // Initialise the empty cells array
+        var cells = new Array(81);
+        
+        // Add the planets to the cells array
+        cells[40] = {cellType: 'planet', cellName: 'Earth'};
+        cells[20] = {cellType: 'planet', cellName: 'Mars'};
+        cells[24] = {cellType: 'planet', cellName: 'Saturn'};
+        cells[60] = {cellType: 'planet', cellName: 'Jupiter'};
+        cells[56] = {cellType: 'planet', cellName: 'Pluto'};
+
+        // Add the baubles to the cells array
+        cells[4] = {cellType: 'bauble', cellName: 'Skull cove'};
+        cells[36] = {cellType: 'bauble', cellName: 'Treasure rock'};
+        cells[44] = {cellType: 'bauble', cellName: 'Sparkle sparkle'};
+        cells[76] = {cellType: 'bauble', cellName: 'Blackbeards chest'};
+
+        console.log(cells);
+
+        // Fill in any empty cells
+        for(var j = 0; j < cells.length; j++) {
+          if(typeof cells[j] == 'undefined' || cells[j] == null) {
+            cells[j] = {cellType: 'space', cellName: ''};
+          }
         }
 
-        // Add the baubles to the cellTypes array
-        for(var k = 0; k < 5; k++) {
-          this.settings.cellTypes.push('bauble');
-        }
-
-        // Add the space to the cellTypes array
-        for(var j = 0; j < 85; j++) {
-          this.settings.cellTypes.push('space');
-        }
-
-        // Shuffle the cellTypes
-        this.shuffle(this.settings.cellTypes);
+        // Save the array
+        this.settings.cells = cells;
+        
 
       },
     shuffle: function(array) {
@@ -74,12 +84,15 @@
     box-sizing: border-box;
   }
 
+  body {
+    background: #000;
+  }
+
   #app {
     display: flex;
     flex-direction: column;
     justify-items: center;
     align-items: center;
-    background: #000;
     color: #fff;
   }
 </style>
